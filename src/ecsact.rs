@@ -31,7 +31,8 @@ impl EcsactExtension {
             _ => "",
         };
         let asset_name = format!(
-            "ecsact_lsp_server_{os}_{arch}{exe_suffix}",
+            "ecsact_lsp_server_{version}_{os}_{arch}{exe_suffix}",
+            version = release.version,
             arch = match arch {
                 zed::Architecture::Aarch64 => "arm64", // not supported yet
                 zed::Architecture::X86 => "x86",       // not supported yet
@@ -50,8 +51,7 @@ impl EcsactExtension {
             .find(|asset| asset.name == asset_name)
             .ok_or_else(|| format!("no asset found matching {:?}", asset_name))?;
 
-        let version_dir = format!("ecsact_lsp_server_{}", release.version);
-        let binary_path = format!("{version_dir}/ecsact_lsp_server{exe_suffix}");
+        let binary_path = format!("ecsact_lsp_server{exe_suffix}");
 
         if !fs::metadata(&binary_path).map_or(false, |stat| stat.is_file()) {
             zed::set_language_server_installation_status(
@@ -86,7 +86,7 @@ impl zed::Extension for EcsactExtension {
     ) -> Result<zed::Command> {
         Ok(zed::Command {
             command: self.language_server_binary_path(config)?,
-            args: vec![],
+            args: vec![String::from("--stdio")],
             env: Default::default(),
         })
     }
