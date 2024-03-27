@@ -1,0 +1,15 @@
+id = "ecsact"
+name = "Ecsact"
+description = "Ecsact support"
+version = "0.0.1"
+schema_version = 1
+authors = []
+repository = "https://github.com/ecsact-dev/ecsact_sdk"
+
+[language_servers.ecsact_lsp_server]
+name = "Ecsact Language Server"
+language = "Ecsact"
+
+[grammars.ecsact]
+repository = "https://github.com/ecsact-dev/tree-sitter-ecsact"
+commit = "572a812765eb861af11fd0debfd894160003ccf9"

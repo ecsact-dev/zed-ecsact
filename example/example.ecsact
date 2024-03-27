@@ -1,0 +1,20 @@
+main package example;
+
+import pkg;
+
+component ExampleComponent {
+    f32 x;
+    f32 y;
+}
+
+component AlwaysRemove;
+
+system MySystem {
+    readwrite pkg.ImportedComponent;
+    readonly ExampleComponent;
+}
+
+system AutoRemoveSystem {
+    include AlwaysRemove;
+    removes ExampleComponent;
+}

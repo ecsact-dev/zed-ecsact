@@ -1,0 +1,5 @@
+package pkg;
+
+component ImportedComponent {
+    i32 hello;
+}
